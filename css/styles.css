@@ -845,6 +845,7 @@ body.dark-mode {
     height: 20px;
     margin-right: 8px;
     vertical-align: middle;
+    accent-color: var(--primary-teal);
 }
 
 .theme-toggle {
