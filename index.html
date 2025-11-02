@@ -234,6 +234,9 @@
                             <strong>Show swipe hints:</strong> Toggle animated hints that show available swipe directions on new tasks.
                         </p>
                         <p style="color: var(--text-dark); line-height: 1.6; margin: 0 0 8px 0;">
+                            <strong>Week starts on:</strong> Choose whether weeks start on Monday or Sunday (affects week number calculation).
+                        </p>
+                        <p style="color: var(--text-dark); line-height: 1.6; margin: 0 0 8px 0;">
                             <strong>Theme:</strong> Choose between light and dark mode.
                         </p>
                         <p style="color: var(--text-dark); line-height: 1.6; margin: 0;">
@@ -296,9 +299,22 @@
                         </label>
                     </div>
                     <div class="setting-item">
+                        <label>Week starts on:</label>
+                        <div class="theme-toggle">
+                            <label for="weekStartMonday">
+                                <input type="radio" name="weekStart" value="monday" id="weekStartMonday" checked>
+                                Monday
+                            </label>
+                            <label for="weekStartSunday">
+                                <input type="radio" name="weekStart" value="sunday" id="weekStartSunday">
+                                Sunday
+                            </label>
+                        </div>
+                    </div>
+                    <div class="setting-item">
                         <label>Theme:</label>
                         <div class="theme-toggle">
-                            <label>
+                            <label for="themeLight">
                                 <input type="radio" name="theme" value="light" id="themeLight" checked>
                                 <svg width="18px" height="18px" stroke-width="1.5" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                                     <path d="M12 18C15.3137 18 18 15.3137 18 12C18 8.68629 15.3137 6 12 6C8.68629 6 6 8.68629 6 12C6 15.3137 8.68629 18 12 18Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
@@ -313,7 +329,7 @@
                                 </svg>
                                 Light
                             </label>
-                            <label>
+                            <label for="themeDark">
                                 <input type="radio" name="theme" value="dark" id="themeDark">
                                 <svg width="18px" height="18px" stroke-width="1.5" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                                     <path d="M3 11.5066C3 16.7497 7.25034 21 12.4934 21C16.2209 21 19.4466 18.8518 21 15.7259C12.4934 15.7259 8.27411 11.5066 8.27411 3C5.14821 4.55344 3 7.77915 3 11.5066Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
@@ -336,7 +352,7 @@
 
                 <!-- Version and Copyright Info -->
                 <div style="margin-top: auto; padding: 20px; padding-bottom: 10px; text-align: center; color: var(--text-light); font-size: 10px; line-height: 1.6;">
-                    <p style="margin: 4px 0;">Version: 0.1.1-beta</p>
+                    <p style="margin: 4px 0;">Version: 0.1.2-beta</p>
                     <p style="margin: 4px 0;">Build: 20251102.2</p>
                     <p style="margin: 12px 0 0 0;">Copyright © 2025 SthlmCode / Mattias Nyqvist. All rights reserved.</p>
                 </div>

@@ -799,16 +799,33 @@ body.dark-mode {
     text-align: center;
     cursor: pointer;
     transition: all 0.2s;
+    background: var(--bg-white);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+}
+
+.theme-toggle label:hover {
+    border-color: var(--primary-blue);
+    background: rgba(74, 144, 226, 0.05);
 }
 
 .theme-toggle input[type="radio"] {
     display: none;
 }
 
-.theme-toggle input[type="radio"]:checked + span {
+.theme-toggle input[type="radio"]:checked + label,
+.theme-toggle label:has(input[type="radio"]:checked) {
     border-color: var(--primary-blue);
-    background: rgba(74, 144, 226, 0.1);
+    background: var(--primary-blue);
+    color: white;
     font-weight: 600;
+}
+
+.theme-toggle label:has(input[type="radio"]:checked) svg {
+    stroke: white;
+    color: white;
 }
 
 .theme-button {

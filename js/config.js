@@ -14,6 +14,9 @@ export const CONFIG = {
     // Show swipe hints animation
     showSwipeHints: true,
 
+    // Week starts on Monday (true) or Sunday (false)
+    weekStartsOnMonday: true,
+
     // Storage key for localStorage
     storageKey: 'focusTasks_v1',
 
@@ -43,7 +46,8 @@ export function saveSettings() {
         const settings = {
             maxFocusTasks: CONFIG.maxFocusTasks,
             autoResetFocus: CONFIG.autoResetFocus,
-            showSwipeHints: CONFIG.showSwipeHints
+            showSwipeHints: CONFIG.showSwipeHints,
+            weekStartsOnMonday: CONFIG.weekStartsOnMonday
         };
         localStorage.setItem(CONFIG.settingsKey, JSON.stringify(settings));
     } catch (error) {

@@ -31,6 +31,10 @@ function initializeApp() {
     document.getElementById('autoResetFocus').checked = CONFIG.autoResetFocus;
     document.getElementById('showSwipeHints').checked = CONFIG.showSwipeHints;
 
+    // Load week start setting
+    const weekStartValue = CONFIG.weekStartsOnMonday ? 'monday' : 'sunday';
+    document.getElementById('weekStart' + weekStartValue.charAt(0).toUpperCase() + weekStartValue.slice(1)).checked = true;
+
     // Load theme
     const savedTheme = localStorage.getItem('theme') || 'light';
     document.getElementById('theme' + savedTheme.charAt(0).toUpperCase() + savedTheme.slice(1)).checked = true;
@@ -57,11 +61,32 @@ function updateTodayDate() {
     const dayName = days[today.getDay()];
     const date = today.getDate();
     const monthName = months[today.getMonth()];
+    const weekNumber = getWeekNumber(today, CONFIG.weekStartsOnMonday);
 
     const dateElement = document.getElementById('todayDate');
     if (dateElement) {
-        dateElement.textContent = `${dayName} ${date} ${monthName}`;
+        dateElement.textContent = `${dayName} ${date} ${monthName} (v.${weekNumber})`;
     }
+}
+
+// Get ISO week number
+function getWeekNumber(date, mondayStart = true) {
+    const d = new Date(Date.UTC(date.getFullYear(), date.getMonth(), date.getDate()));
+    const dayNum = mondayStart ? (d.getUTCDay() || 7) : d.getUTCDay();
+
+    // Set to nearest Thursday (current date + 4 - current day number)
+    // For Monday start: Monday=1, Sunday=7
+    // For Sunday start: Sunday=0, Saturday=6
+    const thursdayOffset = mondayStart ? 4 - dayNum : 4 - (dayNum || 7) + 1;
+    d.setUTCDate(d.getUTCDate() + thursdayOffset);
+
+    // Get first day of year
+    const yearStart = new Date(Date.UTC(d.getUTCFullYear(), 0, 1));
+
+    // Calculate full weeks to nearest Thursday
+    const weekNo = Math.ceil((((d - yearStart) / 86400000) + 1) / 7);
+
+    return weekNo;
 }
 
 function attachEventListeners() {
@@ -88,6 +113,9 @@ function attachEventListeners() {
     document.getElementById('maxFocusTasks').addEventListener('change', handleSettingsChange);
     document.getElementById('autoResetFocus').addEventListener('change', handleSettingsChange);
     document.getElementById('showSwipeHints').addEventListener('change', handleSwipeHintsChange);
+    document.querySelectorAll('input[name="weekStart"]').forEach(radio => {
+        radio.addEventListener('change', handleWeekStartChange);
+    });
     document.querySelectorAll('input[name="theme"]').forEach(radio => {
         radio.addEventListener('change', handleThemeChange);
     });
@@ -1411,6 +1439,13 @@ function handleSwipeHintsChange() {
     CONFIG.showSwipeHints = document.getElementById('showSwipeHints').checked;
     saveSettings();
     applySwipeHints();
+    showToast('✓ Settings saved');
+}
+
+function handleWeekStartChange(e) {
+    CONFIG.weekStartsOnMonday = e.target.value === 'monday';
+    saveSettings();
+    updateTodayDate();
     showToast('✓ Settings saved');
 }
 
