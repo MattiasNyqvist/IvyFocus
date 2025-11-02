@@ -84,9 +84,6 @@ function attachEventListeners() {
         icon.addEventListener('click', handleInfoToggle);
     });
 
-    // Keyboard shortcuts
-    document.addEventListener('keydown', handleKeyboardShortcuts);
-
     // Settings
     document.getElementById('maxFocusTasks').addEventListener('change', handleSettingsChange);
     document.getElementById('autoResetFocus').addEventListener('change', handleSettingsChange);
@@ -176,9 +173,9 @@ function renderTaskList(containerId, tasks) {
         // Improved empty states
         let emptyMessage = 'No tasks yet';
         if (containerId === 'focusList') {
-            emptyMessage = 'Ready to focus? Add your most important tasks above';
+            emptyMessage = 'Add your most important tasks. Click the <svg width="16px" height="16px" stroke-width="1.5" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" style="vertical-align: middle; display: inline-block;"><path d="M8.58737 8.23597L11.1849 3.00376C11.5183 2.33208 12.4817 2.33208 12.8151 3.00376L15.4126 8.23597L21.2215 9.08017C21.9668 9.18848 22.2638 10.0994 21.7243 10.6219L17.5217 14.6918L18.5135 20.4414C18.6409 21.1798 17.8614 21.7428 17.1945 21.3941L12 18.678L6.80547 21.3941C6.1386 21.7428 5.35909 21.1798 5.48645 20.4414L6.47825 14.6918L2.27575 10.6219C1.73617 10.0994 2.03322 9.18848 2.77852 9.08017L8.58737 8.23597Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path></svg> icon on each task to move them to Focus.';
         } else if (containerId === 'allTasksList') {
-            emptyMessage = 'All clear! Add tasks above or swipe from backlog';
+            emptyMessage = 'All clear! Add tasks or swipe from Backlog.<br><br><strong>See Help for all actions.</strong>';
         }
         container.innerHTML = `<div class="empty-state">${emptyMessage}</div>`;
         return;
@@ -824,7 +821,6 @@ function renderBacklog() {
         const textSpan = document.createElement('div');
         textSpan.className = 'task-text';
         textSpan.textContent = task.text;
-        textSpan.style.cursor = 'pointer';
 
         // Delete button
         const deleteBtn = document.createElement('button');
@@ -846,13 +842,6 @@ function renderBacklog() {
         // Assemble wrapper
         wrapper.appendChild(bgLeft);
         wrapper.appendChild(div);
-
-        // Click on text to move back to today
-        textSpan.addEventListener('click', () => {
-            storage.moveFromBacklogToToday(task.id);
-            renderAll();
-            showToast('✓ Moved to today');
-        });
 
         // Swipe to move back to today (with background)
         let startX = 0;
@@ -1201,136 +1190,6 @@ function checkAutoResetFocus() {
             localStorage.setItem('lastFocusReset', today);
             showToast(`🌅 New day! ${cleared} focus task${cleared === 1 ? '' : 's'} cleared`);
         }
-    }
-}
-
-// ============================================
-// KEYBOARD SHORTCUTS
-// ============================================
-
-function handleKeyboardShortcuts(e) {
-    // Ignore if user is typing in an input
-    if (e.target.tagName === 'INPUT' || e.target.contentEditable === 'true') {
-        return;
-    }
-
-    // Number keys 1-4 for view switching
-    if (e.key >= '1' && e.key <= '4') {
-        e.preventDefault();
-        const views = ['focus', 'backlog', 'archive', 'settings'];
-        const viewIndex = parseInt(e.key) - 1;
-        if (views[viewIndex]) {
-            switchView(views[viewIndex]);
-        }
-    }
-
-    // 'n' for new task
-    if (e.key === 'n' || e.key === 'N') {
-        e.preventDefault();
-        const taskInput = document.getElementById('taskInput');
-        if (taskInput) {
-            switchView('focus');
-            setTimeout(() => {
-                taskInput.focus();
-            }, 100);
-        }
-    }
-
-    // '?' for help
-    if (e.key === '?') {
-        e.preventDefault();
-        showKeyboardHelp();
-    }
-
-    // 'Escape' to close help or info sections
-    if (e.key === 'Escape') {
-        closeKeyboardHelp();
-        document.querySelectorAll('.info-section.expanded').forEach(section => {
-            section.classList.remove('expanded');
-        });
-    }
-}
-
-function showKeyboardHelp() {
-    // Remove existing help if present
-    closeKeyboardHelp();
-
-    const helpOverlay = document.createElement('div');
-    helpOverlay.id = 'keyboardHelp';
-    helpOverlay.style.cssText = `
-        position: fixed;
-        top: 0;
-        left: 0;
-        right: 0;
-        bottom: 0;
-        background: rgba(0, 0, 0, 0.8);
-        z-index: 3000;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        animation: fadeIn 0.2s ease;
-    `;
-
-    const helpContent = document.createElement('div');
-    helpContent.style.cssText = `
-        background: var(--bg-white);
-        padding: 32px;
-        border-radius: 12px;
-        max-width: 400px;
-        width: 90%;
-        box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
-    `;
-
-    helpContent.innerHTML = `
-        <h2 style="margin: 0 0 20px 0; color: var(--primary-blue); font-size: 24px;">⌨️ Keyboard Shortcuts</h2>
-        <div style="display: grid; gap: 12px;">
-            <div style="display: flex; justify-content: space-between; align-items: center;">
-                <span style="color: var(--text-dark);">New task</span>
-                <kbd style="background: var(--bg-gray); padding: 4px 12px; border-radius: 4px; font-weight: 600; color: var(--text-dark);">N</kbd>
-            </div>
-            <div style="display: flex; justify-content: space-between; align-items: center;">
-                <span style="color: var(--text-dark);">Focus view</span>
-                <kbd style="background: var(--bg-gray); padding: 4px 12px; border-radius: 4px; font-weight: 600; color: var(--text-dark);">1</kbd>
-            </div>
-            <div style="display: flex; justify-content: space-between; align-items: center;">
-                <span style="color: var(--text-dark);">Backlog view</span>
-                <kbd style="background: var(--bg-gray); padding: 4px 12px; border-radius: 4px; font-weight: 600; color: var(--text-dark);">2</kbd>
-            </div>
-            <div style="display: flex; justify-content: space-between; align-items: center;">
-                <span style="color: var(--text-dark);">Archive view</span>
-                <kbd style="background: var(--bg-gray); padding: 4px 12px; border-radius: 4px; font-weight: 600; color: var(--text-dark);">3</kbd>
-            </div>
-            <div style="display: flex; justify-content: space-between; align-items: center;">
-                <span style="color: var(--text-dark);">Settings view</span>
-                <kbd style="background: var(--bg-gray); padding: 4px 12px; border-radius: 4px; font-weight: 600; color: var(--text-dark);">4</kbd>
-            </div>
-            <div style="display: flex; justify-content: space-between; align-items: center;">
-                <span style="color: var(--text-dark);">Show help</span>
-                <kbd style="background: var(--bg-gray); padding: 4px 12px; border-radius: 4px; font-weight: 600; color: var(--text-dark);">?</kbd>
-            </div>
-            <div style="display: flex; justify-content: space-between; align-items: center;">
-                <span style="color: var(--text-dark);">Close</span>
-                <kbd style="background: var(--bg-gray); padding: 4px 12px; border-radius: 4px; font-weight: 600; color: var(--text-dark);">ESC</kbd>
-            </div>
-        </div>
-        <button id="closeHelpBtn" style="width: 100%; margin-top: 24px; padding: 12px; background: var(--primary-blue); color: white; border: none; border-radius: 8px; font-weight: 600; cursor: pointer; font-size: 16px;">Got it!</button>
-    `;
-
-    helpOverlay.appendChild(helpContent);
-    document.body.appendChild(helpOverlay);
-
-    // Close on click outside or button
-    helpOverlay.addEventListener('click', (e) => {
-        if (e.target === helpOverlay || e.target.id === 'closeHelpBtn') {
-            closeKeyboardHelp();
-        }
-    });
-}
-
-function closeKeyboardHelp() {
-    const existing = document.getElementById('keyboardHelp');
-    if (existing) {
-        existing.remove();
     }
 }
 
