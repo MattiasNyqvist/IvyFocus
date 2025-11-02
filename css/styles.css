@@ -7,17 +7,39 @@
 }
 
 :root {
-    --primary-blue: #4A90E2;
-    --focus-blue: #E8F4FD;
-    --text-dark: #333;
-    --text-light: #666;
-    --border-light: #E0E0E0;
+    /* Custom Teal Color Scheme */
+    --primary-teal: #66b2b2;        /* Active buttons - medium teal */
+    --primary-teal-dark: #008080;   /* Active menu items - classic teal */
+    --primary-teal-light: #99cccc;  /* Light accents */
+    --focus-teal: #e6f2f2;          /* Very light teal background */
+    --header-teal: #006666;         /* Header background - deep teal */
+    --help-bg-teal: #b2d8d8;        /* Help section backgrounds */
+
+    /* Legacy blue (now redirected to teal) */
+    --primary-blue: #66b2b2;        /* Active buttons */
+    --focus-blue: #e6f2f2;          /* Light teal bg */
+
+    /* Neutrals */
+    --text-dark: #1F2937;           /* Dark gray text */
+    --text-light: #6B7280;          /* Medium gray text */
+    --text-on-teal: #FFFFFF;        /* White text on teal */
+    --border-light: #E5E7EB;        /* Light border */
     --bg-white: #FFFFFF;
-    --bg-gray: #F5F5F5;
-    --archive-green: #4CAF50;
-    --backlog-purple: #9C27B0;
-    --delete-red: #F44336;
+    --bg-gray: #F9FAFB;             /* Softer gray background */
+
+    /* Accent Colors */
+    --archive-green: #10B981;       /* Emerald green */
+    --backlog-purple: #8B5CF6;      /* Violet purple */
+    --delete-red: #EF4444;          /* Modern red */
+
     --nav-height: 70px;
+}
+
+html {
+    overflow: hidden;
+    height: 100%;
+    width: 100%;
+    position: fixed;
 }
 
 body {
@@ -26,29 +48,51 @@ body {
     color: var(--text-dark);
     margin: 0;
     padding: 0;
-    overflow-x: hidden;
+    overflow: hidden;
+    height: 100%;
+    width: 100%;
+    position: fixed;
+    -webkit-overflow-scrolling: touch;
 }
 
 body.dark-mode {
-    --primary-blue: #6db3f2;
-    --focus-blue: #1e3a5f;
-    --text-dark: #f0f0f0;
-    --text-light: #b8b8b8;
-    --border-light: #3a3a3a;
-    --bg-white: #1a1a1a;
-    --bg-gray: #0f0f0f;
-    --archive-green: #72c277;
-    --backlog-purple: #ba68c8;
-    --delete-red: #ff6b6b;
+    /* Dark Mode Teal Adjustments */
+    --primary-teal: #66b2b2;        /* Keep same for consistency */
+    --primary-teal-dark: #008080;   /* Classic teal */
+    --primary-teal-light: #99cccc;  /* Light teal */
+    --focus-teal: #003333;          /* Dark teal background */
+    --header-teal: #004d4d;         /* Darker header for dark mode */
+    --help-bg-teal: #336666;        /* Darker help backgrounds */
+
+    --primary-blue: #66b2b2;
+    --focus-blue: #003333;
+
+    --text-dark: #F3F4F6;
+    --text-light: #9CA3AF;
+    --text-on-teal: #FFFFFF;
+    --border-light: #374151;
+    --bg-white: #1F2937;
+    --bg-gray: #111827;
+
+    --archive-green: #34D399;
+    --backlog-purple: #A78BFA;
+    --delete-red: #F87171;
 }
 
 .app-container {
     max-width: 100%;
+    width: 100%;
     height: 100vh;
+    height: 100dvh; /* Dynamic viewport height for mobile */
     display: flex;
     flex-direction: column;
     background: var(--bg-white);
-    position: relative;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    overflow: hidden;
 }
 
 /* Views */
@@ -59,6 +103,8 @@ body.dark-mode {
     right: 0;
     bottom: var(--nav-height);
     overflow: hidden;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
     visibility: hidden;
     opacity: 0;
     transform: translateX(20px);
@@ -66,6 +112,7 @@ body.dark-mode {
     z-index: -1;
     background: var(--bg-white);
     pointer-events: none;
+    width: 100%;
 }
 
 .view.active {
@@ -75,6 +122,7 @@ body.dark-mode {
     transition: opacity 0.3s ease, transform 0.3s ease;
     z-index: 10;
     overflow-y: auto;
+    overflow-x: hidden;
     pointer-events: auto;
 }
 
@@ -117,15 +165,24 @@ body.dark-mode {
 /* Header */
 .app-header {
     padding: 20px 16px 16px;
-    background: var(--bg-white);
-    border-bottom: 1px solid var(--border-light);
+    background: var(--header-teal);
+    border-bottom: 1px solid var(--primary-teal-dark);
 }
 
 .app-header h1 {
     font-size: clamp(20px, 5vw, 28px);
     font-weight: 600;
     margin-bottom: 8px;
-    color: var(--text-dark);
+    color: var(--text-on-teal);
+}
+
+/* Header icon color adjustment */
+.app-header svg {
+    color: var(--text-on-teal) !important;
+}
+
+.app-header svg path {
+    stroke: var(--text-on-teal) !important;
 }
 
 .streak-container {
@@ -134,7 +191,7 @@ body.dark-mode {
 
 .streak-text {
     font-size: clamp(13px, 3vw, 15px);
-    color: var(--text-dark);
+    color: var(--text-on-teal);
     font-weight: 500;
     margin: 0;
     display: flex;
@@ -148,8 +205,8 @@ body.dark-mode {
 }
 
 .streak-text span#streakDays {
-    color: var(--primary-blue);
-    font-weight: 700;
+    color: var(--text-on-teal);
+    font-weight: 500;
     font-size: 16px;
 }
 
@@ -157,7 +214,7 @@ body.dark-mode {
 .progress-bar-container {
     width: 100%;
     height: 8px;
-    background: var(--border-light);
+    background: rgba(255, 255, 255, 0.2);
     border-radius: 10px;
     overflow: hidden;
     margin-bottom: 6px;
@@ -165,23 +222,23 @@ body.dark-mode {
 
 .progress-bar {
     height: 100%;
-    background: linear-gradient(90deg, var(--primary-blue), var(--archive-green));
+    background: linear-gradient(90deg, var(--primary-teal-light), var(--archive-green));
     border-radius: 10px;
     transition: width 0.5s ease;
     width: 0%;
-    box-shadow: 0 0 8px rgba(74, 144, 226, 0.4);
+    box-shadow: 0 0 8px rgba(94, 234, 212, 0.4);
 }
 
 .progress-text {
     font-size: 12px;
-    color: var(--text-light);
+    color: rgba(255, 255, 255, 0.85);
     margin: 0;
 }
 
 .progress-title {
     font-size: clamp(13px, 3vw, 15px);
     font-weight: 600;
-    color: var(--primary-blue);
+    color: var(--text-on-teal);
     margin-bottom: 8px;
     text-align: center;
 }
@@ -224,8 +281,13 @@ body.dark-mode {
 
 .subtitle {
     font-size: 14px;
-    color: var(--text-light);
+    color: rgba(255, 255, 255, 0.8);
     font-style: italic;
+}
+
+/* Subtitle in header needs light color */
+.app-header .subtitle {
+    color: rgba(255, 255, 255, 0.9);
 }
 
 /* Subtitle Container with Info Icon */
@@ -383,7 +445,7 @@ body.dark-mode {
     padding: 12px 16px;
     font-size: clamp(14px, 3.5vw, 17px);
     font-weight: 600;
-    color: var(--primary-blue);
+    color: var(--primary-teal-dark);
     text-transform: uppercase;
     letter-spacing: 0.5px;
 }
@@ -807,8 +869,8 @@ body.dark-mode {
 }
 
 .theme-toggle label:hover {
-    border-color: var(--primary-blue);
-    background: rgba(74, 144, 226, 0.05);
+    border-color: var(--primary-teal);
+    background: rgba(102, 178, 178, 0.05);
 }
 
 .theme-toggle input[type="radio"] {
@@ -817,8 +879,8 @@ body.dark-mode {
 
 .theme-toggle input[type="radio"]:checked + label,
 .theme-toggle label:has(input[type="radio"]:checked) {
-    border-color: var(--primary-blue);
-    background: var(--primary-blue);
+    border-color: var(--primary-teal);
+    background: var(--primary-teal);
     color: white;
     font-weight: 600;
 }
@@ -843,8 +905,8 @@ body.dark-mode {
 }
 
 .theme-button:hover {
-    border-color: var(--primary-blue);
-    background: rgba(74, 144, 226, 0.1);
+    border-color: var(--primary-teal);
+    background: rgba(102, 178, 178, 0.1);
 }
 
 .theme-button:active {
@@ -865,9 +927,10 @@ body.dark-mode {
     display: flex;
     justify-content: space-around;
     align-items: center;
-    z-index: 100;
+    z-index: 1000;
     margin: 0;
-    padding: 0;
+    padding: 5px 0 0 0;
+    padding-bottom: env(safe-area-inset-bottom); /* For devices with notch/home indicator */
 }
 
 @media (min-width: 768px) {
@@ -894,7 +957,7 @@ body.dark-mode {
 }
 
 .nav-btn.active {
-    color: var(--primary-blue);
+    color: var(--primary-teal-dark);
 }
 
 .nav-icon {
@@ -965,4 +1028,18 @@ body.dark-mode {
 /* Remove swipe hint from archive items (no swipe actions there) */
 .archive-task-item.show-swipe-hint {
     animation: none !important;
+}
+
+/* Dark Mode Specific Overrides */
+body.dark-mode .task-star {
+    color: #b2d8d8;
+}
+
+body.dark-mode .task-star svg {
+    stroke: #b2d8d8;
+    fill: none;
+}
+
+body.dark-mode .task-star svg[fill="currentColor"] {
+    fill: #b2d8d8;
 }
