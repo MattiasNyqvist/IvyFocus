@@ -201,9 +201,9 @@ function renderTaskList(containerId, tasks) {
         // Improved empty states
         let emptyMessage = 'No tasks yet';
         if (containerId === 'focusList') {
-            emptyMessage = 'Add your most important tasks. Click the <svg width="16px" height="16px" stroke-width="1.5" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" style="vertical-align: middle; display: inline-block;"><path d="M8.58737 8.23597L11.1849 3.00376C11.5183 2.33208 12.4817 2.33208 12.8151 3.00376L15.4126 8.23597L21.2215 9.08017C21.9668 9.18848 22.2638 10.0994 21.7243 10.6219L17.5217 14.6918L18.5135 20.4414C18.6409 21.1798 17.8614 21.7428 17.1945 21.3941L12 18.678L6.80547 21.3941C6.1386 21.7428 5.35909 21.1798 5.48645 20.4414L6.47825 14.6918L2.27575 10.6219C1.73617 10.0994 2.03322 9.18848 2.77852 9.08017L8.58737 8.23597Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path></svg> icon on each task to move them to Focus.';
+            emptyMessage = 'Click the <svg width="16px" height="16px" stroke-width="1.5" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" style="vertical-align: middle; display: inline-block;"><path d="M8.58737 8.23597L11.1849 3.00376C11.5183 2.33208 12.4817 2.33208 12.8151 3.00376L15.4126 8.23597L21.2215 9.08017C21.9668 9.18848 22.2638 10.0994 21.7243 10.6219L17.5217 14.6918L18.5135 20.4414C18.6409 21.1798 17.8614 21.7428 17.1945 21.3941L12 18.678L6.80547 21.3941C6.1386 21.7428 5.35909 21.1798 5.48645 20.4414L6.47825 14.6918L2.27575 10.6219C1.73617 10.0994 2.03322 9.18848 2.77852 9.08017L8.58737 8.23597Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path></svg> icon on each task to move them to Today Focus.';
         } else if (containerId === 'allTasksList') {
-            emptyMessage = 'All clear! Add tasks or swipe from Backlog.<br><br><strong>See Help for all actions.</strong>';
+            emptyMessage = 'All clear! Add tasks or swipe from Backlog view.<br><br><strong>Swipe Left:</strong> Mark Done / Archive.<br><strong>Swipe Right:</strong> Move to Backlog.<br><strong>Drag Up/Down:</strong> Reorder.<br><br>See Help for more information about views and actions.';
         }
         container.innerHTML = `<div class="empty-state">${emptyMessage}</div>`;
         return;
@@ -291,7 +291,7 @@ function createTaskElement(task) {
     `;
     editBtn.addEventListener('click', (e) => {
         e.stopPropagation();
-        handleEditTask(task.id, textSpan);
+        handleEditTask(task.id, textSpan, editBtn);
     });
 
     // Delete button (X)
@@ -820,6 +820,19 @@ function renderBacklog() {
         textSpan.className = 'task-text';
         textSpan.textContent = task.text;
 
+        // Edit button
+        const editBtn = document.createElement('button');
+        editBtn.className = 'task-edit';
+        editBtn.innerHTML = `
+            <svg width="20px" height="20px" viewBox="0 0 24 24" stroke-width="1.5" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M14.3632 5.65156L15.8431 4.17157C16.6242 3.39052 17.8905 3.39052 18.6716 4.17157L20.0858 5.58579C20.8668 6.36683 20.8668 7.63316 20.0858 8.41421L18.6058 9.8942M14.3632 5.65156L4.74749 15.2672C4.41542 15.5993 4.21079 16.0376 4.16947 16.5054L3.92738 19.2459C3.87261 19.8659 4.39148 20.3848 5.0115 20.33L7.75191 20.0879C8.21972 20.0466 8.65806 19.8419 8.99013 19.5099L18.6058 9.8942M14.3632 5.65156L18.6058 9.8942" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+            </svg>
+        `;
+        editBtn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            handleEditBacklogTask(task.id, textSpan, editBtn);
+        });
+
         // Delete button
         const deleteBtn = document.createElement('button');
         deleteBtn.className = 'task-delete';
@@ -835,6 +848,7 @@ function renderBacklog() {
         });
 
         div.appendChild(textSpan);
+        div.appendChild(editBtn);
         div.appendChild(deleteBtn);
 
         // Assemble wrapper
@@ -947,6 +961,19 @@ function renderArchive() {
         textSpan.style.flex = '1';
         textSpan.style.cursor = 'default';
 
+        // Edit button
+        const editBtn = document.createElement('button');
+        editBtn.className = 'task-edit';
+        editBtn.innerHTML = `
+            <svg width="20px" height="20px" viewBox="0 0 24 24" stroke-width="1.5" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M14.3632 5.65156L15.8431 4.17157C16.6242 3.39052 17.8905 3.39052 18.6716 4.17157L20.0858 5.58579C20.8668 6.36683 20.8668 7.63316 20.0858 8.41421L18.6058 9.8942M14.3632 5.65156L4.74749 15.2672C4.41542 15.5993 4.21079 16.0376 4.16947 16.5054L3.92738 19.2459C3.87261 19.8659 4.39148 20.3848 5.0115 20.33L7.75191 20.0879C8.21972 20.0466 8.65806 19.8419 8.99013 19.5099L18.6058 9.8942M14.3632 5.65156L18.6058 9.8942" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+            </svg>
+        `;
+        editBtn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            handleEditArchiveTask(task.id, textSpan, editBtn);
+        });
+
         // Delete button
         const deleteBtn = document.createElement('button');
         deleteBtn.className = 'task-delete';
@@ -963,6 +990,7 @@ function renderArchive() {
 
         div.appendChild(dateTimeSpan);
         div.appendChild(textSpan);
+        div.appendChild(editBtn);
         div.appendChild(deleteBtn);
         container.appendChild(div);
     });
@@ -985,37 +1013,194 @@ function handleAddTask() {
     renderTasks();
 }
 
-function handleEditTask(id, textElement) {
+function handleEditTask(id, textElement, editBtn) {
     const currentText = textElement.textContent;
-    
-    textElement.contentEditable = true;
-    textElement.focus();
-    
-    // Select all
-    const range = document.createRange();
-    range.selectNodeContents(textElement);
-    const sel = window.getSelection();
-    sel.removeAllRanges();
-    sel.addRange(range);
-    
+    const taskItem = textElement.closest('.task-item');
+
+    // Create input element
+    const input = document.createElement('input');
+    input.type = 'text';
+    input.value = currentText;
+    input.className = 'task-edit-input';
+
+    // Replace text element with input
+    textElement.style.display = 'none';
+    textElement.parentNode.insertBefore(input, textElement);
+    input.focus();
+    input.select();
+
+    // Change pen icon to save/disk icon
+    editBtn.innerHTML = `
+        <svg width="20px" height="20px" viewBox="0 0 24 24" stroke-width="1.5" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M3 19V5C3 3.89543 3.89543 3 5 3H16.1716C16.702 3 17.2107 3.21071 17.5858 3.58579L20.4142 6.41421C20.7893 6.78929 21 7.29799 21 7.82843V19C21 20.1046 20.1046 21 19 21H5C3.89543 21 3 20.1046 3 19Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+            <path d="M8.6 9H15.4C15.7314 9 16 8.73137 16 8.4V3.6C16 3.26863 15.7314 3 15.4 3H8.6C8.26863 3 8 3.26863 8 3.6V8.4C8 8.73137 8.26863 9 8.6 9Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+            <path d="M6 13.6V21H18V13.6C18 13.2686 17.7314 13 17.4 13H6.6C6.26863 13 6 13.2686 6 13.6Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+        </svg>
+    `;
+
     const saveEdit = () => {
-        const newText = textElement.textContent.trim();
-        textElement.contentEditable = false;
-        
+        const newText = input.value.trim();
+
+        // Remove input
+        input.remove();
+        textElement.style.display = '';
+
+        // Restore pen icon
+        editBtn.innerHTML = `
+            <svg width="20px" height="20px" viewBox="0 0 24 24" stroke-width="1.5" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M14.3632 5.65156L15.8431 4.17157C16.6242 3.39052 17.8905 3.39052 18.6716 4.17157L20.0858 5.58579C20.8668 6.36683 20.8668 7.63316 20.0858 8.41421L18.6058 9.8942M14.3632 5.65156L4.74749 15.2672C4.41542 15.5993 4.21079 16.0376 4.16947 16.5054L3.92738 19.2459C3.87261 19.8659 4.39148 20.3848 5.0115 20.33L7.75191 20.0879C8.21972 20.0466 8.65806 19.8419 8.99013 19.5099L18.6058 9.8942M14.3632 5.65156L18.6058 9.8942" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+            </svg>
+        `;
+
         if (newText && newText !== currentText) {
             storage.updateTask(id, { text: newText });
+            renderTasks();
         } else {
             textElement.textContent = currentText;
         }
-        
-        renderTasks();
     };
-    
-    textElement.addEventListener('blur', saveEdit, { once: true });
-    textElement.addEventListener('keypress', (e) => {
+
+    // Save on blur
+    input.addEventListener('blur', saveEdit, { once: true });
+
+    // Save on Enter key
+    input.addEventListener('keypress', (e) => {
         if (e.key === 'Enter') {
             e.preventDefault();
-            textElement.blur();
+            input.blur();
+        }
+    }, { once: true });
+
+    // Cancel on Escape key
+    input.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape') {
+            e.preventDefault();
+            input.value = currentText;
+            input.blur();
+        }
+    }, { once: true });
+}
+
+function handleEditBacklogTask(id, textElement, editBtn) {
+    const currentText = textElement.textContent;
+
+    // Create input element
+    const input = document.createElement('input');
+    input.type = 'text';
+    input.value = currentText;
+    input.className = 'task-edit-input';
+
+    // Replace text element with input
+    textElement.style.display = 'none';
+    textElement.parentNode.insertBefore(input, textElement);
+    input.focus();
+    input.select();
+
+    // Change pen icon to save/disk icon
+    editBtn.innerHTML = `
+        <svg width="20px" height="20px" viewBox="0 0 24 24" stroke-width="1.5" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M3 19V5C3 3.89543 3.89543 3 5 3H16.1716C16.702 3 17.2107 3.21071 17.5858 3.58579L20.4142 6.41421C20.7893 6.78929 21 7.29799 21 7.82843V19C21 20.1046 20.1046 21 19 21H5C3.89543 21 3 20.1046 3 19Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+            <path d="M8.6 9H15.4C15.7314 9 16 8.73137 16 8.4V3.6C16 3.26863 15.7314 3 15.4 3H8.6C8.26863 3 8 3.26863 8 3.6V8.4C8 8.73137 8.26863 9 8.6 9Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+            <path d="M6 13.6V21H18V13.6C18 13.2686 17.7314 13 17.4 13H6.6C6.26863 13 6 13.2686 6 13.6Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+        </svg>
+    `;
+
+    const saveEdit = () => {
+        const newText = input.value.trim();
+
+        // Remove input
+        input.remove();
+        textElement.style.display = '';
+
+        // Restore pen icon
+        editBtn.innerHTML = `
+            <svg width="20px" height="20px" viewBox="0 0 24 24" stroke-width="1.5" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M14.3632 5.65156L15.8431 4.17157C16.6242 3.39052 17.8905 3.39052 18.6716 4.17157L20.0858 5.58579C20.8668 6.36683 20.8668 7.63316 20.0858 8.41421L18.6058 9.8942M14.3632 5.65156L4.74749 15.2672C4.41542 15.5993 4.21079 16.0376 4.16947 16.5054L3.92738 19.2459C3.87261 19.8659 4.39148 20.3848 5.0115 20.33L7.75191 20.0879C8.21972 20.0466 8.65806 19.8419 8.99013 19.5099L18.6058 9.8942M14.3632 5.65156L18.6058 9.8942" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+            </svg>
+        `;
+
+        if (newText && newText !== currentText) {
+            storage.updateBacklogTask(id, { text: newText });
+            renderBacklog();
+        } else {
+            textElement.textContent = currentText;
+        }
+    };
+
+    input.addEventListener('blur', saveEdit, { once: true });
+    input.addEventListener('keypress', (e) => {
+        if (e.key === 'Enter') {
+            e.preventDefault();
+            input.blur();
+        }
+    }, { once: true });
+    input.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape') {
+            e.preventDefault();
+            input.value = currentText;
+            input.blur();
+        }
+    }, { once: true });
+}
+
+function handleEditArchiveTask(id, textElement, editBtn) {
+    const currentText = textElement.textContent;
+
+    // Create input element
+    const input = document.createElement('input');
+    input.type = 'text';
+    input.value = currentText;
+    input.className = 'task-edit-input';
+
+    // Replace text element with input
+    textElement.style.display = 'none';
+    textElement.parentNode.insertBefore(input, textElement);
+    input.focus();
+    input.select();
+
+    // Change pen icon to save/disk icon
+    editBtn.innerHTML = `
+        <svg width="20px" height="20px" viewBox="0 0 24 24" stroke-width="1.5" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M3 19V5C3 3.89543 3.89543 3 5 3H16.1716C16.702 3 17.2107 3.21071 17.5858 3.58579L20.4142 6.41421C20.7893 6.78929 21 7.29799 21 7.82843V19C21 20.1046 20.1046 21 19 21H5C3.89543 21 3 20.1046 3 19Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+            <path d="M8.6 9H15.4C15.7314 9 16 8.73137 16 8.4V3.6C16 3.26863 15.7314 3 15.4 3H8.6C8.26863 3 8 3.26863 8 3.6V8.4C8 8.73137 8.26863 9 8.6 9Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+            <path d="M6 13.6V21H18V13.6C18 13.2686 17.7314 13 17.4 13H6.6C6.26863 13 6 13.2686 6 13.6Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+        </svg>
+    `;
+
+    const saveEdit = () => {
+        const newText = input.value.trim();
+
+        // Remove input
+        input.remove();
+        textElement.style.display = '';
+
+        // Restore pen icon
+        editBtn.innerHTML = `
+            <svg width="20px" height="20px" viewBox="0 0 24 24" stroke-width="1.5" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M14.3632 5.65156L15.8431 4.17157C16.6242 3.39052 17.8905 3.39052 18.6716 4.17157L20.0858 5.58579C20.8668 6.36683 20.8668 7.63316 20.0858 8.41421L18.6058 9.8942M14.3632 5.65156L4.74749 15.2672C4.41542 15.5993 4.21079 16.0376 4.16947 16.5054L3.92738 19.2459C3.87261 19.8659 4.39148 20.3848 5.0115 20.33L7.75191 20.0879C8.21972 20.0466 8.65806 19.8419 8.99013 19.5099L18.6058 9.8942M14.3632 5.65156L18.6058 9.8942" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+            </svg>
+        `;
+
+        if (newText && newText !== currentText) {
+            storage.updateArchiveTask(id, { text: newText });
+            renderArchive();
+        } else {
+            textElement.textContent = currentText;
+        }
+    };
+
+    input.addEventListener('blur', saveEdit, { once: true });
+    input.addEventListener('keypress', (e) => {
+        if (e.key === 'Enter') {
+            e.preventDefault();
+            input.blur();
+        }
+    }, { once: true });
+    input.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape') {
+            e.preventDefault();
+            input.value = currentText;
+            input.blur();
         }
     }, { once: true });
 }
