@@ -488,16 +488,7 @@ function handleVerticalReorder(task, wrapper, diffY) {
     const allWrappers = Array.from(taskList.querySelectorAll('.task-item-wrapper'));
     const currentWrapperIndex = allWrappers.indexOf(wrapper);
 
-    console.log('handleVerticalReorder called', {
-        taskId: task.id,
-        taskText: task.text,
-        diffY,
-        currentWrapperIndex,
-        totalWrappers: allWrappers.length
-    });
-
     if (currentWrapperIndex === -1) {
-        console.log('Current wrapper not found in list');
         resetTaskElement(wrapper);
         return;
     }
@@ -512,7 +503,6 @@ function handleVerticalReorder(task, wrapper, diffY) {
         newWrapperIndex = currentWrapperIndex + 1;
     } else {
         // Not enough movement, reset
-        console.log('Not enough movement to reorder');
         resetTaskElement(wrapper);
         return;
     }
@@ -522,14 +512,7 @@ function handleVerticalReorder(task, wrapper, diffY) {
     const targetTaskItem = targetWrapper.querySelector('.task-item');
     const targetTaskIdString = targetTaskItem?.dataset.taskId;
 
-    console.log('Target task', {
-        newWrapperIndex,
-        targetTaskIdString,
-        hasTargetItem: !!targetTaskItem
-    });
-
     if (!targetTaskIdString) {
-        console.log('Target task ID not found');
         resetTaskElement(wrapper);
         return;
     }
@@ -541,24 +524,12 @@ function handleVerticalReorder(task, wrapper, diffY) {
     const currentTaskIndex = allTasks.findIndex(t => t.id === task.id);
     const targetTaskIndex = allTasks.findIndex(t => t.id === targetTaskId);
 
-    console.log('Task indices in storage', {
-        currentTaskIndex,
-        targetTaskIndex,
-        totalTasks: allTasks.length
-    });
-
     if (currentTaskIndex === -1 || targetTaskIndex === -1) {
-        console.log('Task index not found in storage');
         resetTaskElement(wrapper);
         return;
     }
 
     // Perform the swap in the tasks array
-    console.log('Swapping tasks', {
-        from: currentTaskIndex,
-        to: targetTaskIndex
-    });
-
     const [movedTask] = allTasks.splice(currentTaskIndex, 1);
     allTasks.splice(targetTaskIndex, 0, movedTask);
 
@@ -580,7 +551,6 @@ function handleVerticalReorder(task, wrapper, diffY) {
     setTimeout(() => {
         renderTasks();
         showToast('✓ Order updated');
-        console.log('Reorder completed successfully');
     }, 10);
 }
 

@@ -543,13 +543,16 @@ body.dark-mode {
     opacity: 0.5;
 }
 
-.task-star {
+/* Task Action Buttons - Base Styles */
+.task-star,
+.task-edit,
+.task-delete,
+.task-move-back {
     width: 32px;
     height: 32px;
     border: none;
     border-radius: 50%;
     background: transparent;
-    color: var(--text-dark);
     padding: 0;
     display: flex;
     align-items: center;
@@ -557,12 +560,23 @@ body.dark-mode {
     cursor: pointer;
     flex-shrink: 0;
     transition: all 0.2s;
+}
+
+.task-star:hover,
+.task-edit:hover,
+.task-delete:hover,
+.task-move-back:hover {
+    transform: scale(1.1);
+}
+
+/* Star Button - Specific Styles */
+.task-star {
+    color: var(--text-dark);
     margin-left: 8px;
 }
 
 .task-star:hover {
     background: rgba(255, 193, 7, 0.1);
-    transform: scale(1.1);
 }
 
 .task-star svg {
@@ -570,27 +584,15 @@ body.dark-mode {
     height: 24px;
 }
 
+/* Edit Button - Specific Styles */
 .task-edit {
-    width: 32px;
-    height: 32px;
-    border: none;
-    border-radius: 50%;
-    background: transparent;
     color: var(--text-light);
-    padding: 0;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
-    flex-shrink: 0;
-    transition: all 0.2s;
     margin-right: 8px;
 }
 
 .task-edit:hover {
     color: var(--primary-blue);
     background: rgba(74, 144, 226, 0.1);
-    transform: scale(1.1);
 }
 
 .task-edit svg {
@@ -598,26 +600,14 @@ body.dark-mode {
     height: 20px;
 }
 
+/* Delete Button - Specific Styles */
 .task-delete {
-    width: 32px;
-    height: 32px;
-    border: none;
-    border-radius: 50%;
-    background: transparent;
     color: var(--text-light);
-    padding: 0;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
-    flex-shrink: 0;
-    transition: all 0.2s;
 }
 
 .task-delete:hover {
     color: var(--delete-red);
     background: rgba(244, 67, 54, 0.1);
-    transform: scale(1.1);
 }
 
 .task-delete svg {
@@ -625,27 +615,15 @@ body.dark-mode {
     height: 20px;
 }
 
+/* Move Back Button - Specific Styles */
 .task-move-back {
-    width: 32px;
-    height: 32px;
-    border: none;
-    border-radius: 50%;
-    background: transparent;
     color: var(--text-light);
-    padding: 0;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
-    flex-shrink: 0;
-    transition: all 0.2s;
     margin-right: 8px;
 }
 
 .task-move-back:hover {
     color: var(--primary-blue);
     background: rgba(74, 144, 226, 0.1);
-    transform: scale(1.1);
 }
 
 .task-move-back svg {
