@@ -11,9 +11,6 @@ export const CONFIG = {
     // Auto-reset focus at midnight
     autoResetFocus: false,
 
-    // Show swipe hints animation
-    showSwipeHints: true,
-
     // Week starts on Monday (true) or Sunday (false)
     weekStartsOnMonday: true,
 

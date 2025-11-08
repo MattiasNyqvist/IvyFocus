@@ -185,6 +185,159 @@ body.dark-mode {
     stroke: var(--text-on-teal) !important;
 }
 
+/* Assistant Section */
+.assistant-section {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 12px 16px;
+    background: var(--help-bg-teal);
+    border-bottom: 1px solid var(--border-light);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    transition: all 0.3s ease;
+}
+
+.assistant-section.hidden {
+    display: none;
+}
+
+.assistant-icon {
+    flex-shrink: 0;
+    width: 24px;
+    height: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--primary-teal-dark);
+}
+
+.assistant-icon svg {
+    stroke: var(--primary-teal-dark);
+}
+
+.assistant-message {
+    flex: 1;
+    font-size: 14px;
+    line-height: 1.4;
+    color: var(--text-dark);
+}
+
+.assistant-close {
+    flex-shrink: 0;
+    width: 32px;
+    height: 32px;
+    border: none;
+    border-radius: 50%;
+    background: transparent;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    color: var(--text-light);
+    transition: all 0.2s;
+}
+
+.assistant-close:hover {
+    background: rgba(0, 0, 0, 0.05);
+    transform: scale(1.1);
+}
+
+.assistant-close:active {
+    transform: scale(0.95);
+}
+
+.assistant-close svg {
+    stroke: currentColor;
+}
+
+/* Dark mode adjustments for assistant */
+body.dark-mode .assistant-section {
+    background: var(--help-bg-teal);
+}
+
+body.dark-mode .assistant-icon svg {
+    stroke: var(--primary-teal-light);
+}
+
+body.dark-mode .assistant-close:hover {
+    background: rgba(255, 255, 255, 0.1);
+}
+
+/* Welcome Modal */
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.6);
+    backdrop-filter: blur(4px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+    padding: 20px;
+}
+
+.modal-content {
+    background: var(--bg-white);
+    border-radius: 16px;
+    padding: 32px 24px;
+    max-width: 480px; /* Match app max-width for mobile */
+    width: calc(100% - 40px); /* Leave margin on sides */
+    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+    animation: modalFadeIn 0.3s ease-out;
+}
+
+@keyframes modalFadeIn {
+    from {
+        opacity: 0;
+        transform: scale(0.95);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+.modal-button {
+    width: 100%;
+    padding: 14px 24px;
+    border: none;
+    border-radius: 8px;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.modal-button-primary {
+    background: var(--primary-teal);
+    color: white;
+}
+
+.modal-button-primary:hover {
+    background: var(--primary-teal-dark);
+    transform: translateY(-1px);
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+}
+
+.modal-button-primary:active {
+    transform: translateY(0);
+}
+
+/* Dark mode adjustments for modal */
+body.dark-mode .modal-overlay {
+    background: rgba(0, 0, 0, 0.8);
+}
+
+body.dark-mode .modal-content {
+    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.3), 0 10px 10px -5px rgba(0, 0, 0, 0.2);
+}
+
 .streak-container {
     flex: 1;
 }
@@ -404,6 +557,130 @@ body.dark-mode {
     border-color: var(--primary-blue);
 }
 
+/* Progress Fold-out */
+.progress-foldout {
+    margin: 0 0 16px 0;
+}
+
+.progress-toggle {
+    width: 100%;
+    padding: 12px 16px;
+    background: transparent;
+    border: none;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 8px;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+.progress-toggle:hover {
+    background: rgba(0, 0, 0, 0.02);
+}
+
+.progress-toggle-text {
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--text-dark);
+}
+
+.progress-toggle-icon {
+    width: 20px;
+    height: 20px;
+    color: var(--primary-teal-dark);
+    transition: transform 0.3s;
+    margin-right: 6px;
+}
+
+.progress-toggle.open .progress-toggle-icon {
+    transform: rotate(180deg);
+}
+
+.progress-content {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease-out, padding 0.3s ease-out;
+    padding: 0 16px;
+}
+
+.progress-content.open {
+    max-height: 500px;
+    padding: 0 16px 16px 16px;
+}
+
+.progress-stats {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    margin-bottom: 16px;
+}
+
+.stat-group {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.stat-group-title {
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--primary-teal-dark);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-bottom: 4px;
+}
+
+.stat-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 6px 0;
+    border-bottom: 1px solid var(--border-light);
+}
+
+.stat-item:last-child {
+    border-bottom: none;
+}
+
+.stat-label {
+    font-size: 14px;
+    color: var(--text-light);
+}
+
+.stat-value {
+    font-size: 16px;
+    font-weight: 600;
+    color: var(--primary-teal-dark);
+}
+
+.progress-bar-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.progress-bar-wrapper .progress-bar-container {
+    flex: 1;
+}
+
+.progress-percentage {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--primary-teal-dark);
+    min-width: 40px;
+    text-align: right;
+}
+
+/* Dark mode for progress fold-out */
+body.dark-mode .progress-toggle:hover {
+    background: rgba(255, 255, 255, 0.05);
+}
+
+body.dark-mode .stat-item {
+    border-bottom-color: var(--border-dark);
+}
+
 /* Task Edit Input */
 .task-edit-input {
     flex: 1;
@@ -434,6 +711,7 @@ body.dark-mode {
     flex-shrink: 0;
     padding: 0;
     color: var(--primary-blue);
+    margin-right: -4px;
 }
 
 .btn-add:hover {
@@ -990,40 +1268,6 @@ body.dark-mode {
         border-left: 1px solid var(--border-light);
         border-right: 1px solid var(--border-light);
     }
-}
-
-/* Swipe Hint Animations */
-/* Today view: swipe both left and right, and up/down */
-@keyframes swipeHintBothWays {
-    0% { transform: translate(0, 0); }
-    15% { transform: translate(15px, 0); }      /* Höger */
-    30% { transform: translate(0, 0); }         /* Center */
-    45% { transform: translate(-15px, 0); }     /* Vänster */
-    60% { transform: translate(0, 0); }         /* Center */
-    75% { transform: translate(0, -12px); }     /* Uppåt */
-    90% { transform: translate(0, 12px); }      /* Nedåt */
-    100% { transform: translate(0, 0); }        /* Center */
-}
-
-/* Backlog view: swipe only left */
-@keyframes swipeHintLeft {
-    0%, 100% { transform: translateX(0); }
-    50% { transform: translateX(-15px); }
-}
-
-/* Apply swipe hint animation to tasks with the hint class */
-.task-item.show-swipe-hint {
-    animation: swipeHintBothWays 3s ease-in-out 1;
-}
-
-/* Backlog items: only show left swipe */
-.backlog-task-item.show-swipe-hint {
-    animation: swipeHintLeft 2s ease-in-out 1;
-}
-
-/* Remove swipe hint from archive items (no swipe actions there) */
-.archive-task-item.show-swipe-hint {
-    animation: none !important;
 }
 
 /* Dark Mode Specific Overrides */

@@ -17,74 +17,124 @@
         <div id="focusView" class="view active">
             <!-- Header -->
             <header class="app-header">
-                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 4px;">
-                    <div>
-                        <h1>Today</h1>
-                        <p class="subtitle" id="todayDate">Sunday 11 Nov</p>
-                    </div>
-                    <svg width="35px" height="35px" viewBox="0 0 24 24" stroke-width="1.0" fill="none" xmlns="http://www.w3.org/2000/svg" color="#005470">
-                        <path d="M7 16L17 16" stroke="#005470" stroke-width="1.0" stroke-linecap="round"></path>
-                        <path d="M9 11L15 11" stroke="#005470" stroke-width="1.0" stroke-linecap="round"></path>
-                        <path d="M10 4V6" stroke="#005470" stroke-width="1.0" stroke-linecap="round"></path>
-                        <path d="M14 4V6" stroke="#005470" stroke-width="1.0" stroke-linecap="round"></path>
-                        <path d="M17.4 9L6.6 9C6.26863 9 6 8.73137 6 8.4L6 4.6C6 4.26863 6.26863 4 6.6 4L17.4 4C17.7314 4 18 4.26863 18 4.6V8.4C18 8.73137 17.7314 9 17.4 9Z" stroke="#005470" stroke-width="1.0" stroke-linecap="round"></path>
-                        <path d="M17.901 21L6.099 21C5.6243 21 5.3318 20.4737 5.57763 20.0676C6.7923 18.061 9.5 13.3271 9.5 11V9.59965C9.5 9.26828 9.76863 9 10.1 9H13.9C14.2314 9 14.5 9.26828 14.5 9.59965V11C14.5 13.3271 17.2077 18.061 18.4224 20.0676C18.6682 20.4737 18.3757 21 17.901 21Z" stroke="#005470" stroke-width="1.0" stroke-linecap="round"></path>
+                <div style="display: flex; justify-content: space-between; align-items: center;">
+                    <h1>Ivy Focus</h1>
+                    <svg width="35px" height="35px" viewBox="0 0 24 24" stroke-width="1.0" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M7 16L17 16" stroke="currentColor" stroke-width="1.0" stroke-linecap="round"></path>
+                        <path d="M9 11L15 11" stroke="currentColor" stroke-width="1.0" stroke-linecap="round"></path>
+                        <path d="M10 4V6" stroke="currentColor" stroke-width="1.0" stroke-linecap="round"></path>
+                        <path d="M14 4V6" stroke="currentColor" stroke-width="1.0" stroke-linecap="round"></path>
+                        <path d="M17.4 9L6.6 9C6.26863 9 6 8.73137 6 8.4L6 4.6C6 4.26863 6.26863 4 6.6 4L17.4 4C17.7314 4 18 4.26863 18 4.6V8.4C18 8.73137 17.7314 9 17.4 9Z" stroke="currentColor" stroke-width="1.0" stroke-linecap="round"></path>
+                        <path d="M17.901 21L6.099 21C5.6243 21 5.3318 20.4737 5.57763 20.0676C6.7923 18.061 9.5 13.3271 9.5 11V9.59965C9.5 9.26828 9.76863 9 10.1 9H13.9C14.2314 9 14.5 9.26828 14.5 9.59965V11C14.5 13.3271 17.2077 18.061 18.4224 20.0676C18.6682 20.4737 18.3757 21 17.901 21Z" stroke="currentColor" stroke-width="1.0" stroke-linecap="round"></path>
                     </svg>
-                </div>
-                <div class="subtitle-container">
-                    <div class="streak-container">
-                        <p class="progress-title">Today's Progress</p>
-                        <div class="progress-bar-container">
-                            <div class="progress-bar" id="dailyProgressBar"></div>
-                        </div>
-                        <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 8px; width: 100%;">
-                            <p class="progress-text" id="progressText" style="margin: 0;">0 tasks completed today</p>
-                            <div style="display: flex; align-items: center; gap: 6px; white-space: nowrap;">
-                                <span id="streakDays" style="color: var(--text-on-teal); font-weight: 500;">0</span>
-                                <span style="font-size: clamp(13px, 3vw, 15px); color: var(--text-on-teal);">day streak</span>
-                                <span class="streak-icon">
-                                    <svg width="18px" height="18px" stroke-width="1.5" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                        <path d="M8 18C8 20.4148 9.79086 21 12 21C15.7587 21 17 18.5 14.5 13.5C11 18 10.5 11 11 9C9.5 12 8 14.8177 8 18Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
-                                        <path d="M12 21C17.0495 21 20 18.0956 20 13.125C20 8.15444 12 3 12 3C12 3 4 8.15444 4 13.125C4 18.0956 6.95054 21 12 21Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
-                                    </svg>
-                                </span>
-                            </div>
-                        </div>
-                    </div>
                 </div>
             </header>
 
-            <!-- Task Input -->
-            <div class="task-input-container">
-                <input
-                    type="text"
-                    id="taskInput"
-                    placeholder="Write a new task here..."
-                    maxlength="200"
-                    autocomplete="off"
-                    data-lpignore="true"
-                    data-form-type="other"
-                    data-1p-ignore
-                    data-bwignore
-                >
-                <button class="btn-add" id="addTaskBtn" title="Save task">
-                    <svg width="24px" height="24px" stroke-width="1.0" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M3 19V5C3 3.89543 3.89543 3 5 3H16.1716C16.702 3 17.2107 3.21071 17.5858 3.58579L20.4142 6.41421C20.7893 6.78929 21 7.29799 21 7.82843V19C21 20.1046 20.1046 21 19 21H5C3.89543 21 3 20.1046 3 19Z" stroke="currentColor" stroke-width="1.0"></path>
-                        <path d="M8.6 9H15.4C15.7314 9 16 8.73137 16 8.4V3.6C16 3.26863 15.7314 3 15.4 3H8.6C8.26863 3 8 3.26863 8 3.6V8.4C8 8.73137 8.26863 9 8.6 9Z" stroke="currentColor" stroke-width="1.0"></path>
-                        <path d="M6 13.6V21H18V13.6C18 13.2686 17.7314 13 17.4 13H6.6C6.26863 13 6 13.2686 6 13.6Z" stroke="currentColor" stroke-width="1.0"></path>
+            <!-- Assistant Section -->
+            <div class="assistant-section" id="assistantSection">
+                <div class="assistant-icon">
+                    <svg width="24px" height="24px" viewBox="0 0 24 24" stroke-width="1.5" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M4 11.4998L3.51493 11.6211C2.62459 11.8437 2 12.6436 2 13.5614V15.4382C2 16.356 2.62459 17.1559 3.51493 17.3785L5.25448 17.8134C5.63317 17.9081 6 17.6217 6 17.2313V11.7683C6 11.3779 5.63317 11.0915 5.25448 11.1862L4 11.4998ZM4 11.4998V11C4 6.58172 7.58172 3 12 3C16.4183 3 20 6.58172 20 11V11.4998M20 11.4998L20.4851 11.6211C21.3754 11.8437 22 12.6436 22 13.5614V15.4382C22 16.356 21.3754 17.1559 20.4851 17.3785L20 17.4998M20 11.4998L18.7455 11.1862C18.3668 11.0915 18 11.3779 18 11.7683V17.2313C18 17.6217 18.3668 17.9081 18.7455 17.8134L20 17.4998M15 20.5H18C19.1046 20.5 20 19.6046 20 18.5V18V17.4998M15 20.5C15 19.6716 14.3284 19 13.5 19H10.5C9.67157 19 9 19.6716 9 20.5C9 21.3284 9.67157 22 10.5 22H13.5C14.3284 22 15 21.3284 15 20.5Z" stroke="currentColor" stroke-width="1.5"></path>
+                    </svg>
+                </div>
+                <div class="assistant-message" id="assistantMessage"></div>
+                <button class="assistant-close" id="assistantClose" aria-label="Close assistant">
+                    <svg width="20px" height="20px" stroke-width="1.5" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M6.75827 17.2426L12.0009 12M17.2435 6.75736L12.0009 12M12.0009 12L6.75827 6.75736M12.0009 12L17.2435 17.2426" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
                     </svg>
                 </button>
             </div>
 
+            <!-- Progress Section (Fold-out) -->
+            <div class="progress-foldout">
+                <button class="progress-toggle" id="progressToggle">
+                    <span class="progress-toggle-text">Progress</span>
+                    <svg class="progress-toggle-icon" width="24px" height="24px" stroke-width="1.5" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M16 16L16 8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+                        <path d="M12 16L12 11" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+                        <path d="M8 16L8 13" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+                        <path d="M3 20.4V3.6C3 3.26863 3.26863 3 3.6 3H20.4C20.7314 3 21 3.26863 21 3.6V20.4C21 20.7314 20.7314 21 20.4 21H3.6C3.26863 21 3 20.7314 3 20.4Z" stroke="currentColor" stroke-width="1.5"></path>
+                    </svg>
+                </button>
+                <div class="progress-content" id="progressContent">
+                    <div class="progress-stats">
+                        <div class="stat-group">
+                            <div class="stat-group-title">Focus Tasks (Today)</div>
+                            <div class="stat-item">
+                                <span class="stat-label">Daily Focus Goal:</span>
+                                <span class="stat-value" id="statDailyGoal">6</span>
+                            </div>
+                            <div class="stat-item">
+                                <span class="stat-label">In Today's Focus:</span>
+                                <span class="stat-value" id="statFocusCount">0</span>
+                            </div>
+                            <div class="stat-item">
+                                <span class="stat-label">Completed Today:</span>
+                                <span class="stat-value" id="statCompletedToday">0</span>
+                            </div>
+                        </div>
+                        <div class="stat-group">
+                            <div class="stat-group-title">Regular Tasks</div>
+                            <div class="stat-item">
+                                <span class="stat-label">Tasks (Not in Focus):</span>
+                                <span class="stat-value" id="statRegularTasks">0</span>
+                            </div>
+                            <div class="stat-item">
+                                <span class="stat-label">Backlog Tasks:</span>
+                                <span class="stat-value" id="statBacklogTasks">0</span>
+                            </div>
+                        </div>
+                        <div class="stat-group">
+                            <div class="stat-group-title">Streak</div>
+                            <div class="stat-item">
+                                <span class="stat-label">Current Streak:</span>
+                                <span class="stat-value" id="statStreak">0 days</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="progress-bar-wrapper">
+                        <div class="progress-bar-container">
+                            <div class="progress-bar" id="progressBar"></div>
+                        </div>
+                        <span class="progress-percentage" id="progressPercentage">0%</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Task Input Section -->
+            <section class="task-section" style="padding-top: 0;">
+                <h2 class="section-title">Add New Task</h2>
+                <div class="task-input-container" style="padding: 0 16px; border: none; margin: 0;">
+                    <input
+                        type="text"
+                        id="taskInput"
+                        placeholder="Write a new task here..."
+                        maxlength="200"
+                        autocomplete="off"
+                        data-lpignore="true"
+                        data-form-type="other"
+                        data-1p-ignore
+                        data-bwignore
+                    >
+                    <button class="btn-add" id="addTaskBtn" title="Save task">
+                        <svg width="24px" height="24px" stroke-width="1.0" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M3 19V5C3 3.89543 3.89543 3 5 3H16.1716C16.702 3 17.2107 3.21071 17.5858 3.58579L20.4142 6.41421C20.7893 6.78929 21 7.29799 21 7.82843V19C21 20.1046 20.1046 21 19 21H5C3.89543 21 3 20.1046 3 19Z" stroke="currentColor" stroke-width="1.0"></path>
+                            <path d="M8.6 9H15.4C15.7314 9 16 8.73137 16 8.4V3.6C16 3.26863 15.7314 3 15.4 3H8.6C8.26863 3 8 3.26863 8 3.6V8.4C8 8.73137 8.26863 9 8.6 9Z" stroke="currentColor" stroke-width="1.0"></path>
+                            <path d="M6 13.6V21H18V13.6C18 13.2686 17.7314 13 17.4 13H6.6C6.26863 13 6 13.2686 6 13.6Z" stroke="currentColor" stroke-width="1.0"></path>
+                        </svg>
+                    </button>
+                </div>
+            </section>
+
             <!-- Focus Tasks -->
             <section class="task-section focus-section">
-                <h2 class="section-title">Today's focus <span id="focusCount">(0/6)</span></h2>
+                <h2 class="section-title">Today's Focus Tasks</h2>
                 <div class="task-list" id="focusList"></div>
             </section>
 
             <!-- Regular Tasks -->
             <section class="task-section">
-                <h2 class="section-title">Tasks <span id="allCount">(0)</span></h2>
+                <h2 class="section-title">Regular Tasks</h2>
                 <div class="task-list" id="allTasksList"></div>
             </section>
         </div>
@@ -93,20 +143,33 @@
         <div id="backlogView" class="view">
             <header class="app-header">
                 <div style="display: flex; justify-content: space-between; align-items: center;">
-                    <div>
-                        <h1>Your Backlog</h1>
-                        <p class="subtitle">Tasks you want to do, but not today</p>
-                    </div>
-                    <svg width="35px" height="35px" viewBox="0 0 24 24" stroke-width="1.0" fill="none" xmlns="http://www.w3.org/2000/svg" color="#005470">
-                        <path d="M7 16L17 16" stroke="#005470" stroke-width="1.0" stroke-linecap="round"></path>
-                        <path d="M9 11L15 11" stroke="#005470" stroke-width="1.0" stroke-linecap="round"></path>
-                        <path d="M10 4V6" stroke="#005470" stroke-width="1.0" stroke-linecap="round"></path>
-                        <path d="M14 4V6" stroke="#005470" stroke-width="1.0" stroke-linecap="round"></path>
-                        <path d="M17.4 9L6.6 9C6.26863 9 6 8.73137 6 8.4L6 4.6C6 4.26863 6.26863 4 6.6 4L17.4 4C17.7314 4 18 4.26863 18 4.6V8.4C18 8.73137 17.7314 9 17.4 9Z" stroke="#005470" stroke-width="1.0" stroke-linecap="round"></path>
-                        <path d="M17.901 21L6.099 21C5.6243 21 5.3318 20.4737 5.57763 20.0676C6.7923 18.061 9.5 13.3271 9.5 11V9.59965C9.5 9.26828 9.76863 9 10.1 9H13.9C14.2314 9 14.5 9.26828 14.5 9.59965V11C14.5 13.3271 17.2077 18.061 18.4224 20.0676C18.6682 20.4737 18.3757 21 17.901 21Z" stroke="#005470" stroke-width="1.0" stroke-linecap="round"></path>
+                    <h1>IvyFocus</h1>
+                    <svg width="35px" height="35px" viewBox="0 0 24 24" stroke-width="1.0" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M7 16L17 16" stroke="currentColor" stroke-width="1.0" stroke-linecap="round"></path>
+                        <path d="M9 11L15 11" stroke="currentColor" stroke-width="1.0" stroke-linecap="round"></path>
+                        <path d="M10 4V6" stroke="currentColor" stroke-width="1.0" stroke-linecap="round"></path>
+                        <path d="M14 4V6" stroke="currentColor" stroke-width="1.0" stroke-linecap="round"></path>
+                        <path d="M17.4 9L6.6 9C6.26863 9 6 8.73137 6 8.4L6 4.6C6 4.26863 6.26863 4 6.6 4L17.4 4C17.7314 4 18 4.26863 18 4.6V8.4C18 8.73137 17.7314 9 17.4 9Z" stroke="currentColor" stroke-width="1.0" stroke-linecap="round"></path>
+                        <path d="M17.901 21L6.099 21C5.6243 21 5.3318 20.4737 5.57763 20.0676C6.7923 18.061 9.5 13.3271 9.5 11V9.59965C9.5 9.26828 9.76863 9 10.1 9H13.9C14.2314 9 14.5 9.26828 14.5 9.59965V11C14.5 13.3271 17.2077 18.061 18.4224 20.0676C18.6682 20.4737 18.3757 21 17.901 21Z" stroke="currentColor" stroke-width="1.0" stroke-linecap="round"></path>
                     </svg>
                 </div>
             </header>
+
+            <!-- Assistant Section -->
+            <div class="assistant-section" id="assistantSection">
+                <div class="assistant-icon">
+                    <svg width="24px" height="24px" viewBox="0 0 24 24" stroke-width="1.5" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M4 11.4998L3.51493 11.6211C2.62459 11.8437 2 12.6436 2 13.5614V15.4382C2 16.356 2.62459 17.1559 3.51493 17.3785L5.25448 17.8134C5.63317 17.9081 6 17.6217 6 17.2313V11.7683C6 11.3779 5.63317 11.0915 5.25448 11.1862L4 11.4998ZM4 11.4998V11C4 6.58172 7.58172 3 12 3C16.4183 3 20 6.58172 20 11V11.4998M20 11.4998L20.4851 11.6211C21.3754 11.8437 22 12.6436 22 13.5614V15.4382C22 16.356 21.3754 17.1559 20.4851 17.3785L20 17.4998M20 11.4998L18.7455 11.1862C18.3668 11.0915 18 11.3779 18 11.7683V17.2313C18 17.6217 18.3668 17.9081 18.7455 17.8134L20 17.4998M15 20.5H18C19.1046 20.5 20 19.6046 20 18.5V18V17.4998M15 20.5C15 19.6716 14.3284 19 13.5 19H10.5C9.67157 19 9 19.6716 9 20.5C9 21.3284 9.67157 22 10.5 22H13.5C14.3284 22 15 21.3284 15 20.5Z" stroke="currentColor" stroke-width="1.5"></path>
+                    </svg>
+                </div>
+                <div class="assistant-message" id="assistantMessage"></div>
+                <button class="assistant-close" id="assistantClose" aria-label="Close assistant">
+                    <svg width="20px" height="20px" stroke-width="1.5" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M6.75827 17.2426L12.0009 12M17.2435 6.75736L12.0009 12M12.0009 12L6.75827 6.75736M12.0009 12L17.2435 17.2426" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+                    </svg>
+                </button>
+            </div>
+
             <div class="task-list" id="backlogList"></div>
         </div>
 
@@ -114,20 +177,33 @@
         <div id="archiveView" class="view">
             <header class="app-header">
                 <div style="display: flex; justify-content: space-between; align-items: center;">
-                    <div>
-                        <h1>Your Archive</h1>
-                        <p class="subtitle">Completed tasks</p>
-                    </div>
-                    <svg width="35px" height="35px" viewBox="0 0 24 24" stroke-width="1.0" fill="none" xmlns="http://www.w3.org/2000/svg" color="#005470">
-                        <path d="M7 16L17 16" stroke="#005470" stroke-width="1.0" stroke-linecap="round"></path>
-                        <path d="M9 11L15 11" stroke="#005470" stroke-width="1.0" stroke-linecap="round"></path>
-                        <path d="M10 4V6" stroke="#005470" stroke-width="1.0" stroke-linecap="round"></path>
-                        <path d="M14 4V6" stroke="#005470" stroke-width="1.0" stroke-linecap="round"></path>
-                        <path d="M17.4 9L6.6 9C6.26863 9 6 8.73137 6 8.4L6 4.6C6 4.26863 6.26863 4 6.6 4L17.4 4C17.7314 4 18 4.26863 18 4.6V8.4C18 8.73137 17.7314 9 17.4 9Z" stroke="#005470" stroke-width="1.0" stroke-linecap="round"></path>
-                        <path d="M17.901 21L6.099 21C5.6243 21 5.3318 20.4737 5.57763 20.0676C6.7923 18.061 9.5 13.3271 9.5 11V9.59965C9.5 9.26828 9.76863 9 10.1 9H13.9C14.2314 9 14.5 9.26828 14.5 9.59965V11C14.5 13.3271 17.2077 18.061 18.4224 20.0676C18.6682 20.4737 18.3757 21 17.901 21Z" stroke="#005470" stroke-width="1.0" stroke-linecap="round"></path>
+                    <h1>IvyFocus</h1>
+                    <svg width="35px" height="35px" viewBox="0 0 24 24" stroke-width="1.0" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M7 16L17 16" stroke="currentColor" stroke-width="1.0" stroke-linecap="round"></path>
+                        <path d="M9 11L15 11" stroke="currentColor" stroke-width="1.0" stroke-linecap="round"></path>
+                        <path d="M10 4V6" stroke="currentColor" stroke-width="1.0" stroke-linecap="round"></path>
+                        <path d="M14 4V6" stroke="currentColor" stroke-width="1.0" stroke-linecap="round"></path>
+                        <path d="M17.4 9L6.6 9C6.26863 9 6 8.73137 6 8.4L6 4.6C6 4.26863 6.26863 4 6.6 4L17.4 4C17.7314 4 18 4.26863 18 4.6V8.4C18 8.73137 17.7314 9 17.4 9Z" stroke="currentColor" stroke-width="1.0" stroke-linecap="round"></path>
+                        <path d="M17.901 21L6.099 21C5.6243 21 5.3318 20.4737 5.57763 20.0676C6.7923 18.061 9.5 13.3271 9.5 11V9.59965C9.5 9.26828 9.76863 9 10.1 9H13.9C14.2314 9 14.5 9.26828 14.5 9.59965V11C14.5 13.3271 17.2077 18.061 18.4224 20.0676C18.6682 20.4737 18.3757 21 17.901 21Z" stroke="currentColor" stroke-width="1.0" stroke-linecap="round"></path>
                     </svg>
                 </div>
             </header>
+
+            <!-- Assistant Section -->
+            <div class="assistant-section" id="assistantSection">
+                <div class="assistant-icon">
+                    <svg width="24px" height="24px" viewBox="0 0 24 24" stroke-width="1.5" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M4 11.4998L3.51493 11.6211C2.62459 11.8437 2 12.6436 2 13.5614V15.4382C2 16.356 2.62459 17.1559 3.51493 17.3785L5.25448 17.8134C5.63317 17.9081 6 17.6217 6 17.2313V11.7683C6 11.3779 5.63317 11.0915 5.25448 11.1862L4 11.4998ZM4 11.4998V11C4 6.58172 7.58172 3 12 3C16.4183 3 20 6.58172 20 11V11.4998M20 11.4998L20.4851 11.6211C21.3754 11.8437 22 12.6436 22 13.5614V15.4382C22 16.356 21.3754 17.1559 20.4851 17.3785L20 17.4998M20 11.4998L18.7455 11.1862C18.3668 11.0915 18 11.3779 18 11.7683V17.2313C18 17.6217 18.3668 17.9081 18.7455 17.8134L20 17.4998M15 20.5H18C19.1046 20.5 20 19.6046 20 18.5V18V17.4998M15 20.5C15 19.6716 14.3284 19 13.5 19H10.5C9.67157 19 9 19.6716 9 20.5C9 21.3284 9.67157 22 10.5 22H13.5C14.3284 22 15 21.3284 15 20.5Z" stroke="currentColor" stroke-width="1.5"></path>
+                    </svg>
+                </div>
+                <div class="assistant-message" id="assistantMessage"></div>
+                <button class="assistant-close" id="assistantClose" aria-label="Close assistant">
+                    <svg width="20px" height="20px" stroke-width="1.5" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M6.75827 17.2426L12.0009 12M17.2435 6.75736L12.0009 12M12.0009 12L6.75827 6.75736M12.0009 12L17.2435 17.2426" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+                    </svg>
+                </button>
+            </div>
+
             <div class="archive-list" id="archiveList"></div>
         </div>
 
@@ -135,20 +211,32 @@
         <div id="guideView" class="view">
             <header class="app-header">
                 <div style="display: flex; justify-content: space-between; align-items: center;">
-                    <div>
-                        <h1>Help</h1>
-                        <p class="subtitle">How to use IvyFocus</p>
-                    </div>
-                    <svg width="35px" height="35px" viewBox="0 0 24 24" stroke-width="1.0" fill="none" xmlns="http://www.w3.org/2000/svg" color="#005470">
-                        <path d="M7 16L17 16" stroke="#005470" stroke-width="1.0" stroke-linecap="round"></path>
-                        <path d="M9 11L15 11" stroke="#005470" stroke-width="1.0" stroke-linecap="round"></path>
-                        <path d="M10 4V6" stroke="#005470" stroke-width="1.0" stroke-linecap="round"></path>
-                        <path d="M14 4V6" stroke="#005470" stroke-width="1.0" stroke-linecap="round"></path>
-                        <path d="M17.4 9L6.6 9C6.26863 9 6 8.73137 6 8.4L6 4.6C6 4.26863 6.26863 4 6.6 4L17.4 4C17.7314 4 18 4.26863 18 4.6V8.4C18 8.73137 17.7314 9 17.4 9Z" stroke="#005470" stroke-width="1.0" stroke-linecap="round"></path>
-                        <path d="M17.901 21L6.099 21C5.6243 21 5.3318 20.4737 5.57763 20.0676C6.7923 18.061 9.5 13.3271 9.5 11V9.59965C9.5 9.26828 9.76863 9 10.1 9H13.9C14.2314 9 14.5 9.26828 14.5 9.59965V11C14.5 13.3271 17.2077 18.061 18.4224 20.0676C18.6682 20.4737 18.3757 21 17.901 21Z" stroke="#005470" stroke-width="1.0" stroke-linecap="round"></path>
+                    <h1>IvyFocus</h1>
+                    <svg width="35px" height="35px" viewBox="0 0 24 24" stroke-width="1.0" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M7 16L17 16" stroke="currentColor" stroke-width="1.0" stroke-linecap="round"></path>
+                        <path d="M9 11L15 11" stroke="currentColor" stroke-width="1.0" stroke-linecap="round"></path>
+                        <path d="M10 4V6" stroke="currentColor" stroke-width="1.0" stroke-linecap="round"></path>
+                        <path d="M14 4V6" stroke="currentColor" stroke-width="1.0" stroke-linecap="round"></path>
+                        <path d="M17.4 9L6.6 9C6.26863 9 6 8.73137 6 8.4L6 4.6C6 4.26863 6.26863 4 6.6 4L17.4 4C17.7314 4 18 4.26863 18 4.6V8.4C18 8.73137 17.7314 9 17.4 9Z" stroke="currentColor" stroke-width="1.0" stroke-linecap="round"></path>
+                        <path d="M17.901 21L6.099 21C5.6243 21 5.3318 20.4737 5.57763 20.0676C6.7923 18.061 9.5 13.3271 9.5 11V9.59965C9.5 9.26828 9.76863 9 10.1 9H13.9C14.2314 9 14.5 9.26828 14.5 9.59965V11C14.5 13.3271 17.2077 18.061 18.4224 20.0676C18.6682 20.4737 18.3757 21 17.901 21Z" stroke="currentColor" stroke-width="1.0" stroke-linecap="round"></path>
                     </svg>
                 </div>
             </header>
+
+            <!-- Assistant Section -->
+            <div class="assistant-section" id="assistantSection">
+                <div class="assistant-icon">
+                    <svg width="24px" height="24px" viewBox="0 0 24 24" stroke-width="1.5" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M4 11.4998L3.51493 11.6211C2.62459 11.8437 2 12.6436 2 13.5614V15.4382C2 16.356 2.62459 17.1559 3.51493 17.3785L5.25448 17.8134C5.63317 17.9081 6 17.6217 6 17.2313V11.7683C6 11.3779 5.63317 11.0915 5.25448 11.1862L4 11.4998ZM4 11.4998V11C4 6.58172 7.58172 3 12 3C16.4183 3 20 6.58172 20 11V11.4998M20 11.4998L20.4851 11.6211C21.3754 11.8437 22 12.6436 22 13.5614V15.4382C22 16.356 21.3754 17.1559 20.4851 17.3785L20 17.4998M20 11.4998L18.7455 11.1862C18.3668 11.0915 18 11.3779 18 11.7683V17.2313C18 17.6217 18.3668 17.9081 18.7455 17.8134L20 17.4998M15 20.5H18C19.1046 20.5 20 19.6046 20 18.5V18V17.4998M15 20.5C15 19.6716 14.3284 19 13.5 19H10.5C9.67157 19 9 19.6716 9 20.5C9 21.3284 9.67157 22 10.5 22H13.5C14.3284 22 15 21.3284 15 20.5Z" stroke="currentColor" stroke-width="1.5"></path>
+                    </svg>
+                </div>
+                <div class="assistant-message" id="assistantMessage"></div>
+                <button class="assistant-close" id="assistantClose" aria-label="Close assistant">
+                    <svg width="20px" height="20px" stroke-width="1.5" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M6.75827 17.2426L12.0009 12M17.2435 6.75736L12.0009 12M12.0009 12L6.75827 6.75736M12.0009 12L17.2435 17.2426" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+                    </svg>
+                </button>
+            </div>
 
             <div style="padding: 10px 20px 80px 20px;">
                 <!-- About Ivy Lee Method -->
@@ -272,17 +360,33 @@
             <div style="display: flex; flex-direction: column; height: 100%; min-height: 100%;">
                 <header class="app-header">
                     <div style="display: flex; justify-content: space-between; align-items: center;">
-                        <h1>Settings</h1>
-                        <svg width="35px" height="35px" viewBox="0 0 24 24" stroke-width="1.5" fill="none" xmlns="http://www.w3.org/2000/svg" color="#005470">
-                            <path d="M7 16L17 16" stroke="#005470" stroke-width="1.5" stroke-linecap="round"></path>
-                            <path d="M9 11L15 11" stroke="#005470" stroke-width="1.5" stroke-linecap="round"></path>
-                            <path d="M10 4V6" stroke="#005470" stroke-width="1.5" stroke-linecap="round"></path>
-                            <path d="M14 4V6" stroke="#005470" stroke-width="1.5" stroke-linecap="round"></path>
-                            <path d="M17.4 9L6.6 9C6.26863 9 6 8.73137 6 8.4L6 4.6C6 4.26863 6.26863 4 6.6 4L17.4 4C17.7314 4 18 4.26863 18 4.6V8.4C18 8.73137 17.7314 9 17.4 9Z" stroke="#005470" stroke-width="1.5" stroke-linecap="round"></path>
-                            <path d="M17.901 21L6.099 21C5.6243 21 5.3318 20.4737 5.57763 20.0676C6.7923 18.061 9.5 13.3271 9.5 11V9.59965C9.5 9.26828 9.76863 9 10.1 9H13.9C14.2314 9 14.5 9.26828 14.5 9.59965V11C14.5 13.3271 17.2077 18.061 18.4224 20.0676C18.6682 20.4737 18.3757 21 17.901 21Z" stroke="#005470" stroke-width="1.5" stroke-linecap="round"></path>
+                        <h1>IvyFocus</h1>
+                        <svg width="35px" height="35px" viewBox="0 0 24 24" stroke-width="1.5" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M7 16L17 16" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"></path>
+                            <path d="M9 11L15 11" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"></path>
+                            <path d="M10 4V6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"></path>
+                            <path d="M14 4V6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"></path>
+                            <path d="M17.4 9L6.6 9C6.26863 9 6 8.73137 6 8.4L6 4.6C6 4.26863 6.26863 4 6.6 4L17.4 4C17.7314 4 18 4.26863 18 4.6V8.4C18 8.73137 17.7314 9 17.4 9Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"></path>
+                            <path d="M17.901 21L6.099 21C5.6243 21 5.3318 20.4737 5.57763 20.0676C6.7923 18.061 9.5 13.3271 9.5 11V9.59965C9.5 9.26828 9.76863 9 10.1 9H13.9C14.2314 9 14.5 9.26828 14.5 9.59965V11C14.5 13.3271 17.2077 18.061 18.4224 20.0676C18.6682 20.4737 18.3757 21 17.901 21Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"></path>
                         </svg>
                     </div>
                 </header>
+
+                <!-- Assistant Section -->
+                <div class="assistant-section" id="assistantSection">
+                    <div class="assistant-icon">
+                        <svg width="24px" height="24px" viewBox="0 0 24 24" stroke-width="1.5" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M4 11.4998L3.51493 11.6211C2.62459 11.8437 2 12.6436 2 13.5614V15.4382C2 16.356 2.62459 17.1559 3.51493 17.3785L5.25448 17.8134C5.63317 17.9081 6 17.6217 6 17.2313V11.7683C6 11.3779 5.63317 11.0915 5.25448 11.1862L4 11.4998ZM4 11.4998V11C4 6.58172 7.58172 3 12 3C16.4183 3 20 6.58172 20 11V11.4998M20 11.4998L20.4851 11.6211C21.3754 11.8437 22 12.6436 22 13.5614V15.4382C22 16.356 21.3754 17.1559 20.4851 17.3785L20 17.4998M20 11.4998L18.7455 11.1862C18.3668 11.0915 18 11.3779 18 11.7683V17.2313C18 17.6217 18.3668 17.9081 18.7455 17.8134L20 17.4998M15 20.5H18C19.1046 20.5 20 19.6046 20 18.5V18V17.4998M15 20.5C15 19.6716 14.3284 19 13.5 19H10.5C9.67157 19 9 19.6716 9 20.5C9 21.3284 9.67157 22 10.5 22H13.5C14.3284 22 15 21.3284 15 20.5Z" stroke="currentColor" stroke-width="1.5"></path>
+                        </svg>
+                    </div>
+                    <div class="assistant-message" id="assistantMessage"></div>
+                    <button class="assistant-close" id="assistantClose" aria-label="Close assistant">
+                        <svg width="20px" height="20px" stroke-width="1.5" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M6.75827 17.2426L12.0009 12M17.2435 6.75736L12.0009 12M12.0009 12L6.75827 6.75736M12.0009 12L17.2435 17.2426" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+                        </svg>
+                    </button>
+                </div>
+
                 <div class="settings-container">
                     <div class="setting-item">
                         <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">
@@ -303,8 +407,8 @@
                     </div>
                     <div class="setting-item">
                         <label>
-                            <input type="checkbox" id="showSwipeHints" checked>
-                            Show swipe hints (can be turned off here in settings)
+                            <input type="checkbox" id="showAssistant" checked>
+                            Show assistant (contextual guidance on each page)
                         </label>
                     </div>
                     <div class="setting-item">
@@ -361,9 +465,10 @@
 
                 <!-- Version and Copyright Info -->
                 <div style="margin-top: 10px; padding: 20px; padding-bottom: 10px; text-align: center; color: var(--text-light); font-size: 10px; line-height: 1.6;">
-                    <p style="margin: 4px 0;">Version: 0.1.7-beta</p>
-                    <p style="margin: 4px 0;">Build: 20251103.4</p>
+                    <p style="margin: 4px 0;">Version: 0.3.0-beta</p>
+                    <p style="margin: 4px 0;">Build: 20251108.1</p>
                     <p style="margin: 12px 0 0 0;">Copyright © 2025 SthlmCode / Mattias Nyqvist. All rights reserved.</p>
+                    <p style="margin: 4px 0;"><a href="mailto:mattias.nyqvist@sthlmcode.com" style="color: var(--text-light); text-decoration: none;">mattias.nyqvist@sthlmcode.com</a></p>
                 </div>
             </div>
         </div>
@@ -426,6 +531,54 @@
                 <span class="nav-label">Settings</span>
             </button>
         </nav>
+
+        <!-- Welcome Modal -->
+        <div id="welcomeModal" class="modal-overlay" style="display: none;">
+            <div class="modal-content">
+                <h2 style="color: var(--primary-teal-dark); margin: 0 0 16px 0; font-size: 24px;">Welcome to Ivy Focus!</h2>
+
+                <div style="margin-bottom: 20px;">
+                    <h3 style="color: var(--text-dark); font-size: 16px; margin: 0 0 8px 0;">The Ivy Lee Method</h3>
+                    <p style="color: var(--text-dark); line-height: 1.6; margin: 0 0 12px 0;">
+                        Focus on what truly matters. This app helps you identify and prioritize your most important tasks each day.
+                    </p>
+                    <p style="color: var(--text-dark); line-height: 1.6; margin: 0;">
+                        <strong>How it works:</strong> First, brainstorm and list all your tasks, then star
+                        <svg width="18px" height="18px" viewBox="0 0 24 24" stroke-width="1.5" fill="none" xmlns="http://www.w3.org/2000/svg" style="vertical-align: middle; display: inline-block; margin: 0 2px;">
+                            <path d="M8.58737 8.23597L11.1849 3.00376C11.5183 2.33208 12.4817 2.33208 12.8151 3.00376L15.4126 8.23597L21.2215 9.08017C21.9668 9.18848 22.2638 10.0994 21.7243 10.6219L17.5217 14.6918L18.5135 20.4414C18.6409 21.1798 17.8614 21.7428 17.1945 21.3941L12 18.678L6.80547 21.3941C6.1386 21.7428 5.35909 21.1798 5.48645 20.4414L6.47825 14.6918L2.27575 10.6219C1.73617 10.0994 2.03322 9.18848 2.77852 9.08017L8.58737 8.23597Z" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"></path>
+                        </svg>
+                        the 6 (adjustable) most important ones to focus on today. Work on them one at a time, starting with the most important.
+                    </p>
+                </div>
+
+                <div style="background: var(--help-bg-teal); border-radius: 8px; padding: 16px; margin-bottom: 20px;">
+                    <p style="color: var(--text-dark); line-height: 1.6; margin: 0 0 8px 0; display: flex; align-items: center; gap: 8px;">
+                        <svg width="20px" height="20px" viewBox="0 0 24 24" stroke-width="1.5" fill="none" xmlns="http://www.w3.org/2000/svg" style="flex-shrink: 0;">
+                            <path d="M4 11.4998L3.51493 11.6211C2.62459 11.8437 2 12.6436 2 13.5614V15.4382C2 16.356 2.62459 17.1559 3.51493 17.3785L5.25448 17.8134C5.63317 17.9081 6 17.6217 6 17.2313V11.7683C6 11.3779 5.63317 11.0915 5.25448 11.1862L4 11.4998ZM4 11.4998V11C4 6.58172 7.58172 3 12 3C16.4183 3 20 6.58172 20 11V11.4998M20 11.4998L20.4851 11.6211C21.3754 11.8437 22 12.6436 22 13.5614V15.4382C22 16.356 21.3754 17.1559 20.4851 17.3785L20 17.4998M20 11.4998L18.7455 11.1862C18.3668 11.0915 18 11.3779 18 11.7683V17.2313C18 17.6217 18.3668 17.9081 18.7455 17.8134L20 17.4998M15 20.5H18C19.1046 20.5 20 19.6046 20 18.5V18V17.4998M15 20.5C15 19.6716 14.3284 19 13.5 19H10.5C9.67157 19 9 19.6716 9 20.5C9 21.3284 9.67157 22 10.5 22H13.5C14.3284 22 15 21.3284 15 20.5Z" stroke="currentColor" stroke-width="1.5"></path>
+                        </svg>
+                        <span><strong>Assistant:</strong> Context-aware guidance appears under the header on each page to help you get started.</span>
+                    </p>
+                    <p style="color: var(--text-dark); line-height: 1.6; margin: 0; display: flex; align-items: center; gap: 8px;">
+                        <svg width="20px" height="20px" viewBox="0 0 24 24" stroke-width="1.5" fill="none" xmlns="http://www.w3.org/2000/svg" style="flex-shrink: 0;">
+                            <path d="M12 22C17.5228 22 22 17.5228 22 12C22 6.47715 17.5228 2 12 2C6.47715 2 2 6.47715 2 12C2 17.5228 6.47715 22 12 22Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+                            <path d="M9 9C9 5.49997 14.5 5.5 14.5 9C14.5 11.5 12 10.9999 12 13.9999" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+                            <path d="M12 18.01L12.01 17.9989" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+                        </svg>
+                        <span><strong>Help:</strong> Check the Help page anytime for detailed instructions on swipe actions and features.</span>
+                    </p>
+                </div>
+
+                <div style="display: flex; flex-direction: column; gap: 12px;">
+                    <button id="welcomeGetStarted" class="modal-button modal-button-primary">
+                        Get Started
+                    </button>
+                    <label style="display: flex; align-items: center; justify-content: center; gap: 8px; color: var(--text-light); font-size: 14px; cursor: pointer;">
+                        <input type="checkbox" id="dontShowAgain" style="accent-color: var(--primary-teal);">
+                        Don't show this again
+                    </label>
+                </div>
+            </div>
+        </div>
     </div>
 
     <script type="module" src="js/config.js"></script>
